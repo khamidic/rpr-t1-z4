@@ -1,44 +1,38 @@
 package etf.unsa.ba;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentTest {
-    private Student s = new Student("Ime", "Prezime", 12345);
+
+    private Student s = new Student("Rambo", "Amadeus", 17178);
+
     @Test
-    void getIme() {
-        assertEquals("Ime", s.getIme());
+    void geteri() {
+        assertEquals("Rambo", s.getIme());
+        assertEquals("Amadeus", s.getPrezime());
+        assertEquals(17178, s.getBrojIndeksa());
     }
 
     @Test
-    void getPrezime() {
-        assertEquals("Prezime", s.getPrezime());
+    void seteri() {
+        s.setIme("Hasim");
+        assertEquals("Hasim", s.getIme());
+        s.setPrezime("Brkan");
+        assertEquals("Brkan", s.getPrezime());
+        s.setBrojIndeksa(11921);
+        assertEquals(11921, s.getBrojIndeksa());
     }
 
     @Test
-    void getBrojIndeksa() {
-        assertEquals(12345, s.getBrojIndeksa());
+    void tostringic() {
+        assertEquals("Rambo Amadeus (17178)", s.toString());
     }
 
     @Test
-    void setIme() {
-        s.setIme("Ajsa");
-        assertEquals("Ajsa", s.getIme());
-    }
-
-    @Test
-    void setPrezime() {
-        s.setPrezime("Hajradinovic");
-        assertEquals("Hajradinovic", s.getPrezime());
-    }
-
-    @Test
-    void setBrojIndeksa() {
-        s.setBrojIndeksa(18031);
-        assertEquals(18031, s.getBrojIndeksa());
-    }
-
-    @Test
-    void testToString() {
-        assertEquals("Prezime Ime (12345)", s.toString());
+    void testiranjejednakosti() {
+        Student k = new Student("Hajra", "Rajlovic", 12912);
+        assertEquals(false ,s.equals(k));
     }
 }

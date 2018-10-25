@@ -29,19 +29,24 @@ public class Predmet {
     }
 
     public void ispisi(Student s) {
-        for(int i = 0; i < getMaxBrojStudenata(); i++)
-            if(studenti[i] != null && s.equals(studenti[i]))  {
-                for(int j = i; j < getMaxBrojStudenata() - 1; j++)
-                    if(studenti[j] != null)
-                        studenti[j] = studenti[j + 1];
+        boolean ispisan = false;
+        for(int i = 0; i < getMaxBrojStudenata(); i++) {
+            if(s.equals(studenti[i])) {
+                studenti[i] = null;
+                ispisan = true;
+                break;
             }
+        }
     }
+
     public void upisi(Student s) {
-        for(int i = 0; i < getMaxBrojStudenata(); i++)
-            if(studenti[i] == null) {
+        for(int i = 0; i < getMaxBrojStudenata(); i++) {
+            if (s.equals(studenti[i])) throw new IllegalArgumentException("Isti student!");
+            if (studenti[i] == null) {
                 studenti[i] = s;
                 break;
             }
+        }
     }
     public void ispisi() {
         for(int i = 0; i < getMaxBrojStudenata(); i++) if(studenti[i] != null)  System.out.println(studenti[i]);

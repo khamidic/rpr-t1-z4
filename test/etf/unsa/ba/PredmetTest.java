@@ -6,40 +6,53 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PredmetTest {
 
-    private Predmet predmet = new Predmet("RPR", 12, 10);
+    private Predmet p = new Predmet("RPR", 17, 5);
+
     @Test
-    void testGetters() {
-        assertAll("Getteri",
-                () -> assertEquals("RPR", predmet.getNazivPredmeta()),
-                () -> assertEquals(12, predmet.getSifraPredmeta()),
-                () -> assertEquals(10, predmet.getMaxBrojStudenata())
-        );
-    }
-    @Test
-    void setNazivPredmeta() {
-        predmet.setNazivPredmeta("OR");
-        assertEquals("OR", predmet.getNazivPredmeta());
+    void geteri() {
+        assertEquals("RPR", p.getNazivPredmeta());
+        assertEquals(17, p.getSifraPredmeta());
+        assertEquals(5, p.getMaxBrojStudenata());
     }
 
     @Test
-    void setSifraPredmeta() {
-        predmet.setSifraPredmeta(10);
-        assertEquals(10, predmet.getSifraPredmeta());
+    void seteri() {
+        p.setNazivPredmeta("ASP");
+        assertEquals("ASP", p.getNazivPredmeta());
+        p.setSifraPredmeta(13);
+        assertEquals(13, p.getSifraPredmeta());
     }
 
     @Test
-    void ispisi() {
-        Student s = new Student("Ime", "Prezime", 123450);
-        predmet.upisi(s);
-        predmet.ispisi(s);
-        assertEquals(null, predmet.dajStudent(0));
+    void ispisiStudenta() {
+        Student s1 = new Student("Hasim", "Begovic", 17172);
+        Student s2 = new Student("Boban", "Bajramovic", 12321);
+        p.upisi(s1); p.upisi(s2);
+        p.ispisi(s1);
+        assertEquals("Hasim Begovic (17172)", s1.toString());
     }
 
     @Test
-    void upisi() {
-        Predmet p = new Predmet("RPR", 12, 10);
-        Student s = new Student("Ajsa", "H", 12345);
-        p.upisi(s);
-        assertEquals("H Ajsa (12345)", p.dajStudent(0).toString());
+    void ispisiDrugiPut() {
+        Student s = new Student("Rovan", "Nedovic", 12131);
+        try {
+            p.ispisi(s);
+        }
+        catch(IllegalArgumentException w) {
+            assertEquals("Nema studenta na predmetu!", w.getMessage());
+        }
     }
+
+    @Test
+    void istiStudent() {
+        Student s1 = new Student("Hasim", "Taci", 12311);
+        p.upisi(s1);
+        try {
+            p.upisi(s1);
+        }
+        catch(IllegalArgumentException w) {
+            assertEquals("Isti student!", w.getMessage());
+        }
+    }
+
 }
